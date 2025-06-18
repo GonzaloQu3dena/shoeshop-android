@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.qu3dena.shoeshop.android.ui.theme.ShoeShopAndroidTheme
+import com.qu3dena.shoeshop.android.core.ui.theme.ShoeShopAndroidTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

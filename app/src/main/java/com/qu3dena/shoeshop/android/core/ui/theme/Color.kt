@@ -1,4 +1,4 @@
-package com.qu3dena.shoeshop.android.ui.theme
+package com.qu3dena.shoeshop.android.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
