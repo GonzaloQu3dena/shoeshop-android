@@ -17,6 +17,7 @@ fun SetupNavGraph(
         startDestination = Graph.CATALOG.route
     ) {
         catalogNavGraph(
+            route = Graph.CATALOG.route,
             navController = navController
         )
     }
