@@ -12,4 +12,6 @@ interface SneakerRepository {
     fun deleteFavorite(sneaker: Sneaker): Flow<Unit>
 
     fun saveFavorite(sneaker: Sneaker): Flow<Sneaker>
+
+    fun getFavorites(): Flow<List<Sneaker>>
 }
