@@ -53,7 +53,9 @@ class SneakerRepositoryImpl @Inject constructor(
             FavoriteSneakerEntity(
                 id = sneaker.id,
                 name = sneaker.name,
-                isFavorite = sneaker.isFavorite
+                isFavorite = sneaker.isFavorite,
+                image = sneaker.image,
+                description = sneaker.description
             )
         )
         emit(Unit)

@@ -9,14 +9,18 @@ import com.qu3dena.shoeshop.android.catalog.domain.model.Sneaker
 data class FavoriteSneakerEntity(
     @PrimaryKey val id: Long,
     val name: String,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val image: String,
+    val description: String
 ) {
     companion object {
         fun fromDomain(sneaker: Sneaker): FavoriteSneakerEntity {
             return FavoriteSneakerEntity(
                 id = sneaker.id,
                 name = sneaker.name,
-                isFavorite = sneaker.isFavorite
+                isFavorite = sneaker.isFavorite,
+                image = sneaker.image,
+                description = sneaker.description
             )
         }
     }
@@ -31,10 +35,10 @@ data class FavoriteSneakerEntity(
             price = 0,
             isFavorite = isFavorite,
             sizesAvailable = emptyList<SizesAvailable>(),
-            image = "",
+            image = image,
             rating = 0.0,
             reviewCount = 0,
-            description = "",
+            description = description,
             availableColors = emptyList()
         )
     }
