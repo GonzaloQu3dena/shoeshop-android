@@ -3,6 +3,7 @@ package com.qu3dena.shoeshop.android.catalog.domain.di
 import com.qu3dena.shoeshop.android.catalog.domain.repository.SneakerRepository
 import com.qu3dena.shoeshop.android.catalog.domain.usecases.DeleteFavoriteUseCase
 import com.qu3dena.shoeshop.android.catalog.domain.usecases.GetAllSneakersUseCase
+import com.qu3dena.shoeshop.android.catalog.domain.usecases.GetFavoriteSneakersUseCase
 import com.qu3dena.shoeshop.android.catalog.domain.usecases.GetSneakerByIdUseCase
 import com.qu3dena.shoeshop.android.catalog.domain.usecases.SaveFavoriteUseCase
 import dagger.Module
@@ -34,4 +35,9 @@ object CatalogDomainModule {
     @Singleton
     fun provideDeleteFavoriteUseCase(repository: SneakerRepository) =
         DeleteFavoriteUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetFavoriteSneakersUseCase(repository: SneakerRepository) =
+        GetFavoriteSneakersUseCase(repository)
 }
