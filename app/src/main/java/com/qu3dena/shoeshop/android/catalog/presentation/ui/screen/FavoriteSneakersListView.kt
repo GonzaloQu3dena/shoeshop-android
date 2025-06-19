@@ -1,5 +1,7 @@
 package com.qu3dena.shoeshop.android.catalog.presentation.ui.screen
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +33,7 @@ import com.qu3dena.shoeshop.android.catalog.presentation.ui.viewmodel.FavoriteSn
 
 @Composable
 fun FavoriteSneakersListView(
+    onSneakerDetail: (Long) -> Unit,
     viewModel: FavoriteSneakersListViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -56,6 +59,7 @@ fun FavoriteSneakersListView(
             }
 
             else -> {
+
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
@@ -65,7 +69,12 @@ fun FavoriteSneakersListView(
                     verticalArrangement = Arrangement.spacedBy(3.dp)
                 ) {
                     items(uiState.value.sneakers) { sneaker ->
-                        FavoriteSneakerItemView(sneaker = sneaker)
+                        FavoriteSneakerItemView(
+                            sneaker = sneaker,
+                            onSneakerDetail =  {
+                                onSneakerDetail(sneaker.id)
+                            }
+                        )
                     }
                 }
             }
@@ -75,13 +84,19 @@ fun FavoriteSneakersListView(
 
 @Composable
 fun FavoriteSneakerItemView(
-    sneaker: Sneaker
+    sneaker: Sneaker,
+    onSneakerDetail: () -> Unit,
 ) {
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp)
             .width(140.dp)
-            .height(180.dp),
+            .height(180.dp)
+            .clickable(
+                onClick = {
+                    onSneakerDetail()
+                }
+            ),
         elevation = CardDefaults.cardElevation(),
     ) {
         Column(
@@ -97,7 +112,9 @@ fun FavoriteSneakerItemView(
             )
 
             Column(
-                modifier = Modifier.weight(1f).fillMaxSize(),
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(

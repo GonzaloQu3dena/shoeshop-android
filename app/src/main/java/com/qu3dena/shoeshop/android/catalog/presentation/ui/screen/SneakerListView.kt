@@ -1,5 +1,6 @@
 package com.qu3dena.shoeshop.android.catalog.presentation.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,7 @@ import com.qu3dena.shoeshop.android.catalog.presentation.ui.viewmodel.SneakerLis
 
 @Composable
 fun SneakerListView(
+    onSneakerDetail: (Long) -> Unit,
     viewModel: SneakerListViewModel = hiltViewModel(),
 ) {
 
@@ -64,6 +66,9 @@ fun SneakerListView(
                     items(uiState.value.sneakers) { sneaker ->
                         SneakerItemView(
                             sneaker = sneaker,
+                            onSneakerDetail = {
+                                onSneakerDetail(sneaker.id)
+                            },
                             onToggleFavorite = {
                                 viewModel.toggleFavorite(it)
                             }
@@ -78,13 +83,19 @@ fun SneakerListView(
 @Composable
 private fun SneakerItemView(
     sneaker: Sneaker,
+    onSneakerDetail: () -> Unit,
     onToggleFavorite: (Sneaker) -> Unit
 ) {
 
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable(
+                onClick = {
+                    onSneakerDetail()
+                }
+            ),
         elevation = CardDefaults.cardElevation()
     ) {
         Row(
