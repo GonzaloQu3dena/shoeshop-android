@@ -53,7 +53,7 @@ private sealed class BottomBarScreen(
         icon = Icons.Default.KeyboardArrowUp
     )
     object CatalogFavorites : BottomBarScreen (
-        route = Screen.SneakerList.route,
+        route = Screen.FavoriteSneakersList.route,
         title = "Catalog Favorites",
         icon = Icons.Default.FavoriteBorder
     )
