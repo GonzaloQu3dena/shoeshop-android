@@ -1,4 +1,4 @@
-package com.qu3dena.shoeshop.android.catalog.data.entities
+package com.qu3dena.shoeshop.android.catalog.data.source.remote.model
 
 import com.google.gson.annotations.SerializedName
 import com.qu3dena.shoeshop.android.catalog.domain.model.SizesAvailable
