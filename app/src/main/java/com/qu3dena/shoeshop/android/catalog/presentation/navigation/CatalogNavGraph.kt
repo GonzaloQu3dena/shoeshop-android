@@ -4,6 +4,7 @@ import androidx.navigation.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.qu3dena.shoeshop.android.catalog.presentation.ui.screen.FavoriteSneakersListView
 import com.qu3dena.shoeshop.android.catalog.presentation.ui.screen.SneakerListView
 
 fun NavGraphBuilder.catalogNavGraph(
@@ -16,6 +17,9 @@ fun NavGraphBuilder.catalogNavGraph(
     ) {
         composable(Screen.SneakerList.route) {
             SneakerListView()
+        }
+        composable(Screen.FavoriteSneakersList.route) {
+            FavoriteSneakersListView()
         }
     }
 }
