@@ -3,7 +3,9 @@ package com.qu3dena.shoeshop.android.catalog.presentation.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.qu3dena.shoeshop.android.catalog.domain.model.Sneaker
+import com.qu3dena.shoeshop.android.catalog.domain.usecases.DeleteFavoriteUseCase
 import com.qu3dena.shoeshop.android.catalog.domain.usecases.GetAllSneakersUseCase
+import com.qu3dena.shoeshop.android.catalog.domain.usecases.SaveFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +22,9 @@ data class SneakerListUiState(
 
 @HiltViewModel
 class SneakerListViewModel @Inject constructor(
-    private val getAllSneakersUseCase: GetAllSneakersUseCase
+    private val getAllSneakersUseCase: GetAllSneakersUseCase,
+    private val saveFavoriteUseCase: SaveFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SneakerListUiState())
@@ -30,7 +34,7 @@ class SneakerListViewModel @Inject constructor(
         fetchSneakers()
     }
 
-   fun fetchSneakers() {
+    fun fetchSneakers() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
 
@@ -46,5 +50,14 @@ class SneakerListViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun toggleFavorite(sneaker: Sneaker) {
+        viewModelScope.launch {
+            if (sneaker.isFavorite) deleteFavoriteUseCase.invoke(sneaker).collect{ }
+            else saveFavoriteUseCase.invoke(sneaker).collect { }
+
+        }
+        fetchSneakers()
     }
 }

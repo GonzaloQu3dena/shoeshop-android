@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -20,6 +21,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.qu3dena.shoeshop.android.catalog.presentation.navigation.Screen
 import com.qu3dena.shoeshop.android.core.navigation.Graph
 import com.qu3dena.shoeshop.android.core.navigation.SetupNavGraph
 
@@ -45,17 +47,23 @@ private sealed class BottomBarScreen(
     val title: String,
     val icon: ImageVector
 ) {
-    object Sneaker : BottomBarScreen (
+    object Catalog : BottomBarScreen (
         route = Graph.CATALOG.route,
         title = "Catalog",
         icon = Icons.Default.KeyboardArrowUp
+    )
+    object CatalogFavorites : BottomBarScreen (
+        route = Screen.SneakerList.route,
+        title = "Catalog Favorites",
+        icon = Icons.Default.FavoriteBorder
     )
 }
 
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        BottomBarScreen.Sneaker,
+        BottomBarScreen.Catalog,
+        BottomBarScreen.CatalogFavorites
     )
 
     val navBackStackEntry = navController.currentBackStackEntryAsState()
